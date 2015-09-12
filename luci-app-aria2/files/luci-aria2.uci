@@ -1,0 +1,15 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@aria2[-1]
+	add ucitrack aria2
+	set ucitrack.@aria2[-1].init=aria2
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+
+/etc/init.d/aria2 enable >/dev/null 2>&1
+/etc/init.d/aria2delaystarter enable >/dev/null 2>&1
+
+exit 0
