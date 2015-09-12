@@ -1,0 +1,32 @@
+#!/bin/sh
+
+mounted_mnt=`cat '/proc/mounts'`
+mounted_swap=`cat '/proc/swaps'`
+mounted_all="$mounted_mnt$mounted_swap"
+
+# Mount USB Disk
+for i in `ls /dev/sd*|grep '[1-9]'`; do
+	is_mount=`echo "$mounted_all"|grep "^$i"`
+	[ -n "$is_mount" ] || {
+		/usr/bin/auto-mount add "${i##*/}"
+	}
+done
+
+# Auto Config Openwrt with 01-auto-config
+[ -f "/etc/leenchan" ] && {
+	rm -f /etc/rc.d/S99auto-config
+	exit 0
+}
+
+if [ -n "`ls -A /mnt 2>&-`" ]; then
+	for mntsh in /mnt/* ; do
+		[ -f "$mntsh/openwrt/01-auto-config" ] && {
+			/bin/chmod 755 "$mntsh/openwrt/01-auto-config"
+			"$mntsh/openwrt/01-auto-config"
+		}
+	done
+fi
+
+rm -f /etc/rc.d/S99auto-config
+
+exit 0

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+mounted_mnt=`cat '/proc/mounts'`
+mounted_swap=`cat '/proc/swaps'`
+mounted_all="$mounted_mnt$mounted_swap"
+
+# Mount USB Disk
+for i in `ls /dev/sd*|grep '[1-9]'`; do
+	is_mount=`echo "$mounted_all"|grep "^$i"`
+	[ -n "$is_mount" ] || {
+		/usr/bin/auto-mount add "${i##*/}"
+	}
+done
+
+exit 0
