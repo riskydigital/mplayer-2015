@@ -143,7 +143,7 @@ case "$ACTION" in
                 ntfs)
                     if `grep -Eqs '^[[:space:]]+fuseblk$' /proc/filesystems` ; then
                         if `grep -Eqs '^[[:space:]]+fuseblk$' /proc/filesystems | grep -qs "ufsd"` ; then
-                            MCMD="mount -t ufsd -o ${acs},noatime"
+                            MCMD="mount -t ufsd -o ${acs},noatime,nls=utf8"
                         elif `which mount.ntfs-3g >/dev/null` ; then
                             MCMD="mount -t ntfs-3g -o ${acs},noatime,big_writes,async,umask=000"
                         fi
