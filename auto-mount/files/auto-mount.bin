@@ -44,6 +44,9 @@ MOUNTS_PATH="/mnt"  # Default: /mnt , don't need include the trailing slash (/)
 # Define the add-ons scripts directory for automatic execute
 ADDSH_PATH="/etc/hotplug.d/user"  # Script naming rule: [0-9][0-9]-xxxxx, Eg. 20-backup-sdcard
 
+# IOCHARSET CN:cp936
+IOCHARSET='utf8'
+
 ## End of global settings ##
 
 # Purge the directory MOUNTS_PATH
@@ -132,20 +135,20 @@ case "$ACTION" in
                     fi					;;
                 vfat|msdos)
                     if `grep -vs '^nodev' /proc/filesystems | grep -qs "$FSTYPE"` ; then
-                        MCMD="mount -t $FSTYPE -o ${acs},codepage=936,umask=000"  #iocharset=utf8
+                        MCMD="mount -t $FSTYPE -o ${acs},codepage=936,iocharset=$IOCHARSET,umask=000"
                     fi
                     ;;
                 exfat)
                     if `grep -Eqs '^[[:space:]]+fuseblk$' /proc/filesystems` && `which mount.exfat >/dev/null` ; then
-                        MCMD="mount.exfat -o ${acs},iocharset=cp936,umask=000"
+                        MCMD="mount.exfat -o ${acs},iocharset=$IOCHARSET,umask=000"
                     fi
                     ;;
                 ntfs)
                     if `grep -Eqs '^[[:space:]]+fuseblk$' /proc/filesystems` ; then
                         if `grep -Eqs '^[[:space:]]+fuseblk$' /proc/filesystems | grep -qs "ufsd"` ; then
-                            MCMD="mount -t ufsd -o ${acs},noatime,nls=utf8"
+                            MCMD="mount -t ufsd -o ${acs},noatime,iocharset=$IOCHARSET"
                         elif `which mount.ntfs-3g >/dev/null` ; then
-                            MCMD="mount -t ntfs-3g -o ${acs},noatime,big_writes,async,umask=000"
+                            MCMD="mount -t ntfs-3g -o ${acs},noatime,iocharset=$IOCHARSET,big_writes,async,umask=000"
                         fi
                     fi
                     ;;
