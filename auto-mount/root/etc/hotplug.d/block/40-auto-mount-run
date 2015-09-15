@@ -1,0 +1,18 @@
+#!/bin/sh
+
+MNT_PATH='/mnt'
+FOLDER_NAME='openwrt'
+RUN='00-openwrt'
+
+[ "$ACTION" = 'add' ] && {
+
+    if [ -n "`ls -A $MNT_PATH 2>&-`" ]; then
+        for mntsh in ${MNT_PATH}/* ; do
+            [ -f "$mntsh/$FOLDER_NAME/$RUN" ] && {
+                /bin/chmod 755 "$mntsh/$FOLDER_NAME/$RUN"
+                "$mntsh/$FOLDER_NAME/$RUN"
+            }
+        done
+    fi
+
+}
