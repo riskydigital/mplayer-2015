@@ -45,10 +45,6 @@ endef
 
 define Package/luci-app-vsftpd/install
 	$(CP) ./root/* $(1)
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/vsftpd.init $(1)/etc/init.d/vsftpd
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_CONF) ./files/vsftpd.conf $(1)/etc/config/vsftpd
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/luci-vsftpd.uci $(1)/etc/uci-defaults/luci-vsftpd
 endef
