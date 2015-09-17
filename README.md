@@ -1,22 +1,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-----------luci-vsftpd--------------
+----------luci-vsftpd-------------
+vsftpd-pam-luci
 libdb47
 libpam-db
 vsftpd
-vsftpd-pam-luci
-----------------------------------
+-----
 
 
 Add this line to your feeds.conf.default.
