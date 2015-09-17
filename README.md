@@ -8,6 +8,7 @@ libpam-db
 vsftpd
 -----
 
+luci-vsftpd
 
 Add this line to your feeds.conf.default.
 
