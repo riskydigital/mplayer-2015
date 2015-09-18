@@ -37,7 +37,7 @@ define Package/automount/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) ./files/auto-mount.bin $(1)/usr/bin/auto-mount
 	$(INSTALL_DIR) $(1)/etc/rc.d
-	$(INSTALL_BIN) ./files/auto-mount.init $(1)/etc/rc.d/S99auto-mount
+	$(INSTALL_BIN) ./files/auto-mount.init $(1)/etc/rc.d/S45auto-mount
 	# $(INSTALL_BIN) ./files/auto-config.init $(1)/etc/rc.d/S99auto-config
 endef
 
