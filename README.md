@@ -1,4 +1,4 @@
-
+О╩©
 
 
 ----------luci-vsftpd-------------
@@ -10,7 +10,7 @@ vsftpd
 
 luci-vsftpd
 
-пч╦дак auto-mount фТ╤╞╬м╧рть
+Д©╝Ф■╧Д╨├ auto-mount Е░╞Е┼╗Е╟╠Ф▄┌Х╫╫
 
 
 Add this line to your feeds.conf.default.
