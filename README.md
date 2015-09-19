@@ -10,7 +10,7 @@ vsftpd
 
 luci-vsftpd
 
-20150919全新编译的 auto-mount 启动就挂载
+20150919-2 全新编译的 auto-mount 启动就挂载
 
 
 Add this line to your feeds.conf.default.

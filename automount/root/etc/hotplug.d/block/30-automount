@@ -1,2 +1,3 @@
 #!/bin/sh
-/usr/bin/auto-mount
+
+/usr/bin/automount
