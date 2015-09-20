@@ -16,6 +16,8 @@ luci-vsftpd
 
 添加了 packages/net/reaver 1505没有 reaver
 
+添加了 packages\utils\restorefactory 复位
+
 Add this line to your feeds.conf.default.
 
     src-git ramod git://github.com/openwrt-1983/vftp.git 
