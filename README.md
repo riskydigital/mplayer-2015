@@ -14,6 +14,7 @@ luci-vsftpd
 
 20150920-2 luci-app-uhttpd 替换成 蝈蝈的中文版
 
+添加了 packages/net/reaver 1505没有 reaver
 
 Add this line to your feeds.conf.default.
 
