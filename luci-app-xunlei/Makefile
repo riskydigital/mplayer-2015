@@ -6,8 +6,8 @@
 
 include $(TOPDIR)/rules.mk
 
-LUCI_TITLE:=WebShell module
-LUCI_DEPENDS:=
+LUCI_TITLE:=LuCI Support for Xware downloading app.
+LUCI_DEPENDS:=+wget
 
 include ../../luci.mk
 

@@ -18,6 +18,11 @@ luci-vsftpd
 
 添加了 packages\utils\restorefactory 复位
 
+luci-app-webshell 换成 蝈蝈的了
+
+添加了 luci-app-xunlei
+
+
 Add this line to your feeds.conf.default.
 
     src-git ramod git://github.com/openwrt-1983/vftp.git 
