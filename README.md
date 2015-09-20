@@ -12,7 +12,7 @@ luci-vsftpd
 
 20150919-2 全新编译的 auto-mount 启动就挂载
 
-20150920 luci-app-uhttpd 替换成 蝈蝈的中文版
+20150920-2 luci-app-uhttpd 替换成 蝈蝈的中文版
 
 
 Add this line to your feeds.conf.default.
