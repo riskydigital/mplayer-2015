@@ -22,6 +22,8 @@ luci-app-webshell 换成 蝈蝈的了
 
 添加了 luci-app-xunlei
 
+20150921 添加了 mt7601 驱动
+
 
 Add this line to your feeds.conf.default.
 
