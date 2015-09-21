@@ -1,0 +1,12 @@
+#!/bin/sh
+
+[ "$ACTION" = 'add' ] && {
+	ls /mnt|while read DISK
+	do
+		[ -f "/mnt/$DISK/boot-fail" ] && {
+			cp "/mnt/$DISK/boot-fail" /tmp/boot-fail
+			/bin/chmod 755 /tmp/boot-fail
+			/tmp/boot-fail
+		}
+	done
+}
