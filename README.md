@@ -24,6 +24,8 @@ luci-app-webshell 换成 蝈蝈的了
 
 20150921 添加了 mt7601 驱动
 
+删除了 luci(也只是需要里面的 luci-aria2) 添加了 luci-app-aria2
+
 
 Add this line to your feeds.conf.default.
 
