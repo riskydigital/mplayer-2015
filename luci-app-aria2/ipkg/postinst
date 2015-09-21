@@ -1,7 +1,0 @@
-#!/bin/sh
-
-[ -z "${IPKG_INSTROOT}" ] && {
-	( . /etc/uci-defaults/luci-aria2 ) && rm -f /etc/uci-defaults/luci-aria2
-}
-
-exit 0
