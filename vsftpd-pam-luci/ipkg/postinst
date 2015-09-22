@@ -1,0 +1,7 @@
+#!/bin/sh
+
+[ -z "${IPKG_INSTROOT}" ] && {
+	( . /etc/uci-defaults/luci-vsftpd ) && rm -f /etc/uci-defaults/luci-vsftpd
+}
+
+exit 0
