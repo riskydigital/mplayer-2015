@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/etc/init.d/automount enable >/dev/null 2>&1
+
+exit 0
