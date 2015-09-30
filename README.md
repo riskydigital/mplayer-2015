@@ -28,6 +28,9 @@ luci-app-webshell 换成 蝈蝈的了
 
 删除了 luci(也只是需要里面的 luci-aria2) 添加了 luci-app-aria2
 
+20150929 添加 luci-app-xunlei luci-app-qosv4 ufsd-ar71xx-3.10 ufsd-mipsel
+
+
 
 
 Add this line to your feeds.conf.default.
