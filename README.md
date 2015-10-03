@@ -30,7 +30,7 @@ luci-app-webshell 换成 蝈蝈的了
 
 20150929 添加 luci-app-xunlei luci-app-qosv4 ufsd-ar71xx-3.10 ufsd-mipsel
 
-
+20151003 添加 luci-app-wifidog
 
 
 Add this line to your feeds.conf.default.
