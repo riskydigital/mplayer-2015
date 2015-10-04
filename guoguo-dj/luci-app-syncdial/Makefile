@@ -11,7 +11,7 @@ SECTION:=LuCI
 CATEGORY:=LuCI
 SUBMENU:=3. Applications
 TITLE:=LuCI Support for a diag hack
-DEPENDS:=+kmod-macvlan +luci-app-mwan3
+DEPENDS:=+kmod-macvlan +luci-app-mwan1983
 PKGARCH:=all
 endef
 
