@@ -20,19 +20,18 @@ luci-vsftpd
 
 luci-app-webshell 换成 蝈蝈的了
 
-添加了 luci-app-xunlei
-
 20150921 添加了 mt7601 驱动
 
 20150922 添加了 mdk3
 
 删除了 luci(也只是需要里面的 luci-aria2) 添加了 luci-app-aria2
 
-20150929 添加 luci-app-xunlei luci-app-qosv4 ufsd-ar71xx-3.10 ufsd-mipsel
-
 20151003 添加 luci-app-wifidog
 
-20151004 添加 guoguo-dj 叠加网络 (还没有弄好)
+20151004 添加 guoguo-dj 叠加网络 (还没有弄好)  
+brxg 别人修改的 可以用
+
+
 
 
 Add this line to your feeds.conf.default.
