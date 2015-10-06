@@ -18,7 +18,7 @@ define Package/luci-app-cpulimit
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=LuCI Support for cpulimit downloading app.
-  DEPENDS:=+cpulimit-ng
+  DEPENDS:=+cpulimit
   PKGARCH:=all
   MAINTAINER:=Haxc
 endef
