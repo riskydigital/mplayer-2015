@@ -1,28 +1,24 @@
-
-
-
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-syncy
+PKG_NAME:=SyncY-Python-luci
 PKG_VERSION:=2.5.3
 PKG_RELEASE:=1
 
-#PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
+PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-syncy
-	SECTION:=LuCI
-	CATEGORY:=LuCI
-	SUBMENU:=3. Applications
-	DEPENDS:=kmod-nls-utf8 libopenssl libcurl python python-curl
-	TITLE:=luci syncy
-	PKGARCH:=all
-	MAINTAINER:=syncy
+define Package/$(PKG_NAME)
+        SECTION:=utils
+        CATEGORY:=Utilities
+        DEPENDS:=kmod-nls-utf8 libopenssl libcurl python python-curl
+        TITLE:=SyncY
+        PKGARCH:=all
+        MAINTAINER:=WishInLife
 endef
 
-define Package/luci-app-syncy/description
-Baidu netdisk synchronization software.
+define Package/$(PKG_NAME)/description
+        Baidu netdisk synchronization software.
 endef
 
 define Build/Prepare
@@ -34,11 +30,11 @@ endef
 define Build/Compile
 endef
 
-define Package/luci-app-syncy/conffiles
+define Package/$(PKG_NAME)/conffiles
 	/etc/config/syncy
 endef
 
-define Package/luci-app-syncy/install
+define Package/$(PKG_NAME)/install
 	# $(CP) ./files/* $(1)/
 
 	#install shell
@@ -61,13 +57,13 @@ define Package/luci-app-syncy/install
 	$(INSTALL_DATA) ./files/resources/jQ-syncy.js $(1)/www/luci-static/resources/jQ-syncy.js
 endef
 
-define Package/luci-app-syncy/preinst
+define Package/$(PKG_NAME)/preinst
 	#!/bin/sh
 	[ -f /etc/config/syncy ] && cp /etc/config/syncy /etc/config/syncy.bak.syy
 	exit 0
 endef
 
-define Package/luci-app-syncy/postinst
+define Package/$(PKG_NAME)/postinst
 	#!/bin/sh
 	[ -f /etc/config/syncy.bak.syy ] && mv /etc/config/syncy.bak.syy /etc/config/syncy
 	chmod 644 /etc/config/syncy
@@ -79,13 +75,13 @@ define Package/luci-app-syncy/postinst
 	exit 0
 endef
 
-define Package/luci-app-syncy/prerm
+define Package/$(PKG_NAME)/prerm
 	#!/bin/sh
 	[ -f /etc/config/syncy ] && cp /etc/config/syncy /etc/config/syncy.bak.syy
 	exit 0
 endef
 
-define Package/luci-app-syncy/postrm
+define Package/$(PKG_NAME)/postrm
 endef
 
-$(eval $(call BuildPackage,luci-app-syncy))
+$(eval $(call BuildPackage,$(PKG_NAME)))
