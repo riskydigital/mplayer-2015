@@ -15,7 +15,7 @@ define Package/luci-app-syncy
 SECTION:=LuCI
 CATEGORY:=LuCI
 SUBMENU:=3. Applications
-TITLE:=syncy luci
+TITLE:=luci---syncy                2.5.3
 DEPENDS:=+kmod-nls-utf8 +libopenssl +libcurl +python +python-curl
 PKGARCH:=all
 endef
