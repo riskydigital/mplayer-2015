@@ -1,3 +1,6 @@
+
+
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-SyncY
@@ -9,17 +12,17 @@ PKG_RELEASE:=1
 include $(INCLUDE_DIR)/package.mk
 
 define Package/luci-app-SyncY
-        SECTION:=LuCI
-        CATEGORY:=LuCI
-        SUBMENU:=3. Applications
-        DEPENDS:=kmod-nls-utf8 libopenssl libcurl python python-curl
-        TITLE:=SyncY
-        PKGARCH:=all
-        MAINTAINER:=WishInLife
+	SECTION:=LuCI
+	CATEGORY:=LuCI
+	SUBMENU:=3. Applications
+	DEPENDS:=kmod-nls-utf8 libopenssl libcurl python python-curl
+	TITLE:=SyncY
+	PKGARCH:=all
+	MAINTAINER:=WishInLife
 endef
 
 define Package/luci-app-SyncY/description
-        Baidu netdisk synchronization software.
+	Baidu netdisk synchronization software.
 endef
 
 define Build/Prepare
