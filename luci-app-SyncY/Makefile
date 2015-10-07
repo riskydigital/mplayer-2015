@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-SyncY-Python
+PKG_NAME:=luci-app-SyncY
 PKG_VERSION:=2.5.3
 PKG_RELEASE:=1
 
@@ -8,7 +8,7 @@ PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-SyncY-Python
+define Package/luci-app-SyncY
         SECTION:=LuCI
         CATEGORY:=LuCI
         SUBMENU:=3. Applications
