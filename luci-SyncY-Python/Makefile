@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=SyncY-Python-luci
+PKG_NAME:=luci-SyncY-Python
 PKG_VERSION:=2.5.3
 PKG_RELEASE:=1
 
@@ -8,9 +8,10 @@ PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/$(PKG_NAME)
-        SECTION:=utils
-        CATEGORY:=Utilities
+define Package/luci-SyncY-Python
+        SECTION:=LuCI
+        CATEGORY:=LuCI
+        SUBMENU:=3. Applications
         DEPENDS:=kmod-nls-utf8 libopenssl libcurl python python-curl
         TITLE:=SyncY
         PKGARCH:=all
