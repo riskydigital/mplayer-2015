@@ -16,13 +16,13 @@ define Package/luci-app-syncy
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
 	DEPENDS:=kmod-nls-utf8 libopenssl libcurl python python-curl
-	TITLE:=SyncY
+	TITLE:=luci syncy
 	PKGARCH:=all
-	MAINTAINER:=WishInLife
+	MAINTAINER:=syncy
 endef
 
 define Package/luci-app-syncy/description
-	Baidu netdisk synchronization software.
+Baidu netdisk synchronization software.
 endef
 
 define Build/Prepare
