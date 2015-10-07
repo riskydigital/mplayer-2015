@@ -3,7 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-SyncY
+PKG_NAME:=luci-app-syncy
 PKG_VERSION:=2.5.3
 PKG_RELEASE:=1
 
@@ -11,7 +11,7 @@ PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-SyncY
+define Package/luci-app-syncy
 	SECTION:=LuCI
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
@@ -21,7 +21,7 @@ define Package/luci-app-SyncY
 	MAINTAINER:=WishInLife
 endef
 
-define Package/luci-app-SyncY/description
+define Package/luci-app-syncy/description
 	Baidu netdisk synchronization software.
 endef
 
@@ -34,11 +34,11 @@ endef
 define Build/Compile
 endef
 
-define Package/luci-app-SyncY/conffiles
+define Package/luci-app-syncy/conffiles
 	/etc/config/syncy
 endef
 
-define Package/luci-app-SyncY/install
+define Package/luci-app-syncy/install
 	# $(CP) ./files/* $(1)/
 
 	#install shell
@@ -61,13 +61,13 @@ define Package/luci-app-SyncY/install
 	$(INSTALL_DATA) ./files/resources/jQ-syncy.js $(1)/www/luci-static/resources/jQ-syncy.js
 endef
 
-define Package/luci-app-SyncY/preinst
+define Package/luci-app-syncy/preinst
 	#!/bin/sh
 	[ -f /etc/config/syncy ] && cp /etc/config/syncy /etc/config/syncy.bak.syy
 	exit 0
 endef
 
-define Package/luci-app-SyncY/postinst
+define Package/luci-app-syncy/postinst
 	#!/bin/sh
 	[ -f /etc/config/syncy.bak.syy ] && mv /etc/config/syncy.bak.syy /etc/config/syncy
 	chmod 644 /etc/config/syncy
@@ -79,13 +79,13 @@ define Package/luci-app-SyncY/postinst
 	exit 0
 endef
 
-define Package/luci-app-SyncY/prerm
+define Package/luci-app-syncy/prerm
 	#!/bin/sh
 	[ -f /etc/config/syncy ] && cp /etc/config/syncy /etc/config/syncy.bak.syy
 	exit 0
 endef
 
-define Package/luci-app-SyncY/postrm
+define Package/luci-app-syncy/postrm
 endef
 
-$(eval $(call BuildPackage,luci-app-SyncY))
+$(eval $(call BuildPackage,luci-app-syncy))
