@@ -31,7 +31,7 @@ luci-app-webshell 换成 蝈蝈的了
 20151004 添加 guoguo-dj 叠加网络 (还没有弄好)  
 brxg 别人修改的 可以用
 
-
+20151008 添加 luci-app-syncy 百度云同步插件 2.5.3
 
 
 Add this line to your feeds.conf.default.
