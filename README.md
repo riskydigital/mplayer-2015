@@ -32,6 +32,7 @@ luci-app-webshell 换成 蝈蝈的了
 brxg 别人修改的 可以用
 
 20151008 添加 luci-app-syncy 百度云同步插件 2.5.3
+luci-app-cpulimit  cpu限制使用率
 
 
 Add this line to your feeds.conf.default.
