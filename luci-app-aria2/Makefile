@@ -11,7 +11,7 @@ SECTION:=LuCI
 CATEGORY:=LuCI
 SUBMENU:=3. Applications
 TITLE:=LuCI Support for aria2
-DEPENDS:=+aria2
+DEPENDS:=+aria2-1983
 PKGARCH:=all
 endef
 
