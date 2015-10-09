@@ -34,6 +34,11 @@ brxg 别人修改的 可以用
 20151008 添加 luci-app-syncy 百度云同步插件 2.5.3
 luci-app-cpulimit  cpu限制使用率
 
+20151009 添加 luci-app-xunlei2 这个测试成功 不死机了
+
+
+
+
 
 Add this line to your feeds.conf.default.
 
