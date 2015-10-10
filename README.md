@@ -29,14 +29,14 @@ luci-app-webshell 换成 蝈蝈的了
 20151003 添加 luci-app-wifidog
 
 20151004 添加 guoguo-dj 叠加网络 (还没有弄好)  
-brxg 别人修改的 可以用
+brxg 别人修改的 可以用  
 
 20151008 添加 luci-app-syncy 百度云同步插件 2.5.3
 luci-app-cpulimit  cpu限制使用率
 
 20151009 添加 luci-app-xunlei2 这个测试成功 不死机了
 
-
+20151010 删除 guoguo-dj
 
 
 
