@@ -17,3 +17,9 @@ config syncy
 	option threadnumber '2'
 
 config syncytoken
+
+config syncpath
+	option localpath '/mnt/sda1/123'
+	option remotepath '/123'
+	option synctype 'upload'
+	option enable '0'

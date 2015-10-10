@@ -227,7 +227,7 @@ if nixio.fs.access("/etc/config/fstab") then
         pth.titleref = luci.dispatcher.build_url("admin", "system", "fstab")
 end
 
-s:option(Value, "remotepath", translate("云端目录"), translate("必须为“/我的应用数据/SyncY”及其子目录")).rmempty = false
+s:option(Value, "remotepath", translate("云端目录"), translate("在云端的“/我的应用数据/SyncY”下面")).rmempty = false
 
 st = s:option(ListValue, "synctype", translate("同步类型"))
 st.default = "upload"
