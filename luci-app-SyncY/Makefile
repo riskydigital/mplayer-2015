@@ -16,7 +16,7 @@ SECTION:=LuCI
 CATEGORY:=LuCI
 SUBMENU:=3. Applications
 TITLE:=luci---syncy                2.5.3
-DEPENDS:=+kmod-nls-utf8 +libopenssl +libcurl +python +python-curl
+DEPENDS:=+kmod-nls-utf8 +libopenssl +libcurl +python +python-curl +python-json +pyopenssl +python-openssl
 PKGARCH:=all
 endef
 
