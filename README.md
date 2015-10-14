@@ -38,6 +38,9 @@ luci-app-cpulimit  cpu限制使用率
 
 20151010 删除 guoguo-dj
 
+20151009 添加 luci-app-uhttpd 完全汉化版
+.po转换成.lmo
+
 
 
 Add this line to your feeds.conf.default.
