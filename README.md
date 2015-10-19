@@ -41,6 +41,12 @@ luci-app-cpulimit  cpu限制使用率
 20151009 添加 luci-app-uhttpd 完全汉化版
 .po转换成.lmo
 
+20151019 添加 luci-app-autoap (里面两个版本 ar71xx和ramips) 中继增强插件
+
+
+
+
+
 
 
 Add this line to your feeds.conf.default.
