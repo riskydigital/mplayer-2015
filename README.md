@@ -43,7 +43,7 @@ luci-app-cpulimit  cpu限制使用率
 
 20151019 添加 luci-app-autoap (里面两个版本 ar71xx和ramips) 中继增强插件
 
-
+20151117 添加 MP3文件夹-路由器播放MP3和网络歌曲网络电台  jichuzujian文件夹-基础组件
 
 
 
