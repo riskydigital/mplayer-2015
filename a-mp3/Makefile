@@ -10,14 +10,14 @@ define Package/a-mp3
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
-  TITLE:=LuCI Support for a-mp3 downloading app.
+  TITLE:=a-mp3
   DEPENDS:=+libffmpeg-full +mpd-full +alsa-utils +kmod-sound-core +kmod-usb-audio +ffmpeg 
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
 
 define Package/a-mp3/description
-Xunlei configuration module.Include init script and auto update app
+mp3
 endef
 
 define Build/Compile
