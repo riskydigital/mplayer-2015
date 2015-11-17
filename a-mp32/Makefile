@@ -11,7 +11,7 @@ define Package/a-mp32
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=a-mp32
-  DEPENDS:=+kmod-usb-audio +mpd-full
+  DEPENDS:=+kmod-usb-audio +mpd-full +ffmpeg
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
