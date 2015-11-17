@@ -11,7 +11,7 @@ define Package/a-mp3
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=a-mp3
-  DEPENDS:=+kmod-sound-core +libffmpeg-full +alsa-utils +mpd-full +ffmpeg
+  DEPENDS:=+kmod-sound-core +libffmpeg-full +alsa-utils +mpd-full
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
