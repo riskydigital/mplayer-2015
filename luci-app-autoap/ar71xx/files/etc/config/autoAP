@@ -19,7 +19,7 @@ config autoap 'general'
 
 config autoap 'once'
 	option ipsub '192.168.8.1'
-	option need_run '1'
+	option need_run '0'
 	option ssid 'OpenWrt-ap'
 	option encryption 'psk-mixed'
 	option key 'long1983'
