@@ -13,7 +13,7 @@ PKG_RELEASE:=1.1.0
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-autoap/ar71xx/luci-app-autoap-ar71xx-1.0.0
+define Package/luci-app-autoap-ar71xx-1.0.0
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
