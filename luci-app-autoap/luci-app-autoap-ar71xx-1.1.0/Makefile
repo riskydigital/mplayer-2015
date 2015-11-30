@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-autoap-ar71xx-1.1.0
 PKG_VERSION:=long1983
-PKG_RELEASE:=1.1.0
+PKG_RELEASE:=
 
 include $(INCLUDE_DIR)/package.mk
 
