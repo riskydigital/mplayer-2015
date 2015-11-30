@@ -30,8 +30,8 @@ endef
 define Build/Compile
 endef
 
-define Package/luci-app-autoap-ar71xx/install
+define Package/luci-app-autoap-ar71xx-1/install
 	$(CP) ./files/* $(1)
 endef
 
-$(eval $(call BuildPackage,luci-app-autoap-ar71xx))
+$(eval $(call BuildPackage,luci-app-autoap-ar71xx-1))
