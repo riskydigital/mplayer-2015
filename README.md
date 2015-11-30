@@ -41,11 +41,11 @@ luci-app-cpulimit  cpu限制使用率
 20151009 添加 luci-app-uhttpd 完全汉化版
 .po转换成.lmo
 
-20151019 添加 luci-app-autoap (里面两个版本 ar71xx和ramips) 中继增强插件
+20151019 添加 luci-app-autoap (里面两个版本 ar71xx和ramips 1.1.0版本) 中继增强插件
 
 20151117 添加 a-MP3文件夹-路由器播放MP3和网络歌曲网络电台 a-mp32文件夹是和a-MP3一起用的 a-jichuzujian文件夹-基础组件
 
-
+20151130 添加 luci-app-autoap (里面两个版本 ar71xx和ramips 1.0.0版本) 中继增强插件
 
 
 
