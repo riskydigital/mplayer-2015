@@ -7,31 +7,31 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-autoap-ar71xx-2
+PKG_NAME:=luci-app-autoap-ramips-1.0.0
 PKG_VERSION:=long1983
 PKG_RELEASE:=1.1.0
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-autoap-ar71xx-2
+define Package/luci-app-autoap-ramips-1.0.0
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
-  TITLE:=LuCI Support for autoap-ar71xx downloading app.
+  TITLE:=LuCI Support for autoap-ramips downloading app.
   DEPENDS:=
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
 
-define Package/luci-app-autoap-ar71xx/description
+define Package/luci-app-autoap-ramips-1.0.0/description
 Xunlei configuration module.Include init script and auto update app
 endef
 
 define Build/Compile
 endef
 
-define Package/luci-app-autoap-ar71xx/install
+define Package/luci-app-autoap-ramips-1.0.0/install
 	$(CP) ./files/* $(1)
 endef
 
-$(eval $(call BuildPackage,luci-app-autoap-ar71xx))
+$(eval $(call BuildPackage,luci-app-autoap-ramips-1.0.0))

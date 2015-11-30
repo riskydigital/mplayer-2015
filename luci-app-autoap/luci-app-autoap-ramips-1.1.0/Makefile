@@ -23,15 +23,15 @@ define Package/luci-app-autoap-ramips-1.1.0
   MAINTAINER:=long1983
 endef
 
-define Package/luci-app-autoap-ramips/description
+define Package/luci-app-autoap-ramips-1.1.0/description
 Xunlei configuration module.Include init script and auto update app
 endef
 
 define Build/Compile
 endef
 
-define Package/luci-app-autoap-ramips/install
+define Package/luci-app-autoap-ramips-1.1.0/install
 	$(CP) ./files/* $(1)
 endef
 
-$(eval $(call BuildPackage,luci-app-autoap-ramips))
+$(eval $(call BuildPackage,luci-app-autoap-ramips-1.1.0))
