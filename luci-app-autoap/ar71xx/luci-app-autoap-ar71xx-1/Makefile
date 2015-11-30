@@ -7,13 +7,13 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-autoap-ar71xx-1.0.0
+PKG_NAME:=luci-app-autoap-ar71xx-1
 PKG_VERSION:=long1983
-PKG_RELEASE:=1.1.0
+PKG_RELEASE:=1.0.0
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-autoap-ar71xx-1.0.0
+define Package/luci-app-autoap-ar71xx-1
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
