@@ -23,7 +23,7 @@ config autoap 'once'
 	option key 'long1983'
 	option apRadio 'ra0'
 	option staRadio 'ra0'
-	option need_run '1'
+	option need_run '0'
 
 config 'relay' 'st1'
 	option 'enabled' '1'
