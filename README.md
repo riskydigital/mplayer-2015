@@ -47,6 +47,9 @@ luci-app-cpulimit  cpu限制使用率
 
 20151130 添加 luci-app-autoap (里面两个版本 ar71xx和ramips 1.0.0版本) 中继增强插件
 
+20160303 添加 luci-app-nfs (和samba一样的东西 不过比samba节省资源)
+
+
 
 
 Add this line to your feeds.conf.default.
