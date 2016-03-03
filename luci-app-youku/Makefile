@@ -12,8 +12,9 @@ PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-youku
-  CATEGORY:=Firefly Configuration
+define Package/luci-app-youku-mt7620
+  SECTION:=LuCI
+  CATEGORY:=LuCI
   SUBMENU:=Applications
   DEPENDS:=+librt +libstdcpp +libthread-db
   TITLE:=LuCI support for the youku
