@@ -7,12 +7,12 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=luci-app-youku-mt7620
+PKG_NAME:=luci-app-youku
 PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-youku-mt7620
+define Package/luci-app-youku
   CATEGORY:=Firefly Configuration
   SUBMENU:=Applications
   DEPENDS:=+librt +libstdcpp +libthread-db
