@@ -15,7 +15,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/luci-app-youku
   SECTION:=LuCI
   CATEGORY:=LuCI
-  SUBMENU:=Applications
+  SUBMENU:=3. Applications
   DEPENDS:=+librt +libstdcpp +libthread-db
   TITLE:=LuCI support for the youku
 endef
