@@ -1,12 +1,14 @@
 --[[
 LuCI - Lua Configuration Interface
-youku for KOS
+youku for wmiboy
 $Id$
 ]]--
 local jq = "<script src='http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js'></script>"
 local ajax = "<script>setInterval(function(){$.get('/cgi-bin/luci/ykspd',function(s){if(1 == s.success){$('#ykspd').html(s.data)}},'json')},3000)</script>"
 local kosqd = luci.http.formvalue("cbi.apply")
 local opsn = luci.sys.exec("echo $(uci get -q youku.youku.opsn)")
+local tog = luci.sys.exec("echo $(uci get -q youku.credits.today)")
+local today_lastday = luci.sys.exec("echo $(uci get -q youku.credits.today_lastday)")
 local macsn = luci.sys.exec("echo 2115$(cat /sys/class/net/br-lan/address|tr -d ':'|md5sum |tr -dc [^0-9]|cut -c 0-12)")
 local oldday = luci.sys.exec("cat /etc/today")
 local button = ""
@@ -15,7 +17,6 @@ local sudu = luci.sys.exec("/lib/spd")
 local running = (luci.sys.call("pidof ikuacc > /dev/null") == 0)
 local run = (luci.sys.call("pidof youkudome > /dev/null") == 0)
 
-luci.sys.exec("wget -O /lib/youku/FILES -T 3 -t 10 --no-check-certificate http://wmiboy.3v51.com/FILES.xml")
 luci.sys.exec("wget -O /tmp/user  http://pcdnapi.youku.com/pcdn/user/check_bindinfo?pid=0000$(uci get -q youku.youku.opsn)")
 luci.sys.exec("wget -O /tmp/day 'http://pcdnapi.youku.com/pcdn/credit/summary?&pid=0000'$(uci get -q youku.youku.opsn)")
 
@@ -51,18 +52,30 @@ bdzt=""
 o = s:taboption("basic",Flag, "enable", translate("是否启用矿机"))
 o.rmempty = false
 else
-o = s:taboption("basic",Flag, "enable", translate("是否启用矿机"), "<strong>"..translate("S/N: ").."</strong>".."<font color='green'> <strong>" ..opsn.."</strong></font>".."<font color='green'> <strong>" ..bd_button..
-"</strong><br></br></font>")
+o = s:taboption("basic",Flag, "enable", translate("是否启用矿机"), "<strong>"..translate("S/N: ").."</strong>".."<font color='green'> <strong>" ..opsn.."</strong></font>".."<font color='green'> <strong>" ..bd_button.."</strong><br></br></font>")
 o.rmempty = false
 end
 
-o = s:taboption("huanc",DummyValue,"","<p style='text-align:left'><strong>"..translate("绑定状态: ").."</strong>".."<font color='green'> <strong>" ..bdzt.."<br></br></strong></font><strong>"..translate("今日收益: ").."</strong>".."<font color='green'> <strong>" ..today.."</strong><br></br></font><strong>"..translate("昨日收益: ").."</strong>".."<font color='green'> <strong>" ..lastday.."<br></br></strong></font><strong>"..translate("总收益: ").."</strong>".."<font color='green'> <strong>" ..total.."</strong><br></br></font></p>",translate("每小时收益").."<br></br>"..oldday)
+o = s:taboption("huanc",DummyValue,"","<p style='text-align:left'><strong>"..translate("绑定状态: ").."</strong>".."<font color='green'> <strong>" ..bdzt.."<br></br></strong></font><strong>"..translate("今日收益: ").."</strong>".."<font color='green'> <strong>" ..today.."</strong><br></br></font><strong>"..translate("昨日收益: ").."</strong>".."<font color='green'> <strong>" ..lastday.."<br></br></strong></font><strong>"..translate("昨日流量: ").."</strong>".."<font color='green'> <strong>" ..today_lastday.."</strong></font><br></br><strong>"..translate("总收益: ").."</strong>".."<font color='green'> <strong>" ..total.."</strong><br></br></font></p>",translate("每小时收益: 上一小时速度: ")..tog.."<br></br>"..oldday)
 
-o9 = s:taboption("basic",Value, "opsn", translate("S/N"),translate("输入S/N保存后，确定左侧“当前正在使用的S/N号”是需要绑定的号后再按按钮绑定。可以使用路由宝原版S/N。"))
+o9 = s:taboption("basic",Value, "opsn", translate("S/N"),translate("输入S/N保存后，有显示绑定按钮的需要再绑定，绑定过的S/N号”是不需要再绑定的。"))
        if opsn ~= "" then
 	o9:value(opsn)
 	o9:value(macsn, macsn..translate("( 根据MAC获得SN)"))
        end
+
+xwareup = s:taboption("basic", ListValue, "VERSION", translate("插件版本"))
+xwareup:value("", translate("默认版本(211)"))
+for i, p_ipk in luci.util.vspairs(luci.util.split(luci.sys.exec("ls $(uci get -q youku.@path[0].path)/ikuacc |grep ikuacc|sed 's/ikuacc.//'"))) do
+       if p_ipk ~= "" then
+	xwareup:value(p_ipk)
+       end
+end
+for i, p_ipk in luci.util.vspairs(luci.util.split(luci.sys.exec("awk '{print$1}' /lib/youku/FILES"))) do
+       if p_ipk ~= "" then
+	xwareup:value(p_ipk)
+       end
+end
 
 o = s:taboption("basic",ListValue, "wkmod", translate("挖矿模式"))
 o:value("0", translate("激进模式：赚取收益优先"))
@@ -75,9 +88,9 @@ o:value("0100", translate("1点整重启"))
 o:value("0245", translate("2点45重启"))
 o:value("0300", translate("3点重启"))
 o = s:taboption("basic",Flag, "ikrebot", translate("只重启矿机"), translate("勾选表示只重启挖矿程序，不勾选则重启路由器。"))
-ssn = s:taboption("basic", DummyValue,"opennewwindow","" ,"<strong>"..translate("推荐 S/N: ").."</strong>"..
-"<font color='green'> <strong>" ..macsn.."</strong></font>")
+ssn = s:taboption("basic", DummyValue,"opennewwindow","" ,"<strong>"..translate("推荐 S/N: ").."</strong>".."<font color='green'> <strong>" ..macsn.."</strong></font>")
 ssn:depends("opsn","")
+
 
 s2 = m:section(TypedSection, "path", translate("缓存文件"),
 	translate("请在“系统-挂载点”里把磁盘挂载到/mnt目录下，缓存的大小是按1000MB=1GB算的，如7GB的剩余空间就填写7000"))
