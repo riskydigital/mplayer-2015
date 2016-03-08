@@ -11,7 +11,7 @@ SECTION:=LuCI
 CATEGORY:=LuCI
 SUBMENU:=3. Applications
 TITLE:=LuCI Support for NFS
-DEPENDS:=+nfs-kernel-server
+DEPENDS:=+nfs-kernel-server +luci
 PKGARCH:=all
 endef
 
@@ -49,8 +49,8 @@ define Package/luci-app-nfs/install
 	$(INSTALL_BIN) ./files/nfs.firewall $(1)/etc/firewall.nfs
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/luci-nfs.uci $(1)/etc/uci-defaults/luci-nfs
-	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
-	$(STAGING_DIR_HOST)/bin/po2lmo ./files/nfs.zh-cn.po $(1)/usr/lib/lua/luci/i18n/nfs.zh-cn.lmo
+	# $(INSTALL_DIR) $(1)/usr/lib/lua/luci/i18n
+	# $(STAGING_DIR_HOST)/bin/po2lmo ./files/nfs.zh-cn.po $(1)/usr/lib/lua/luci/i18n/nfs.zh-cn.lmo
 endef
 
 $(eval $(call BuildPackage,luci-app-nfs))

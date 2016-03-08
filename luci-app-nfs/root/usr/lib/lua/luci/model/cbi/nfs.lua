@@ -8,7 +8,7 @@ s.anonymous = true
 s.addremove = true
 s.template = "cbi/tblsection"
 
-en=s:option(Flag, "enabled", translate("Enable"))
+en = s:option(Flag, "enabled", translate("Enable"))
 en.rmempty = false
 en.default = "1"
 
@@ -37,13 +37,20 @@ is = s:option(Flag, "insecure", translate("Insecure"))
 is.default = "1"
 is.rmempty = false
 
+g = m:section(TypedSection, "general")
+g.anonymous = true
+
+en=g:option(Flag, "external_access", translate(""), translate("Allow external network access"))
+en.rmempty = false
+en.default = "0"
+
 -- NFS Mount --
 c = m:section(TypedSection, "mount", translate("Mounted Points"))
 c.anonymous = true
 c.addremove = true
 c.template = "cbi/tblsection"
 
-en=c:option(Flag, "enabled", translate("Enable"))
+en = c:option(Flag, "enabled", translate("Enable"))
 en.default = "1"
 en.rmempty = false
 

@@ -2,51 +2,89 @@
 START=45
 STOP=99
 EXTRA_COMMANDS="firewall restart"
-APP='nfs'
+APP="nfs"
 
 check_nfsd() {
 	pidof nfsd &>/dev/null && return 0
 	return 1
 }
 
-get_lan_ip() {
-	LAN_IP=$(uci get network.lan.ipaddr)
-	[ -z "$LAN_IP" ] && return 1
-	LAN_IP="${LAN_IP%.*}.0/24"
-	WAN_IF=$(uci get network.wan.ifname)
-	[ -z "$WAN_IF" ] && return 1
+get_lan_wan_ip() {
+	[ -z "$1" ] && return 1
+	ip=''
+	. /lib/functions/network.sh>/dev/null
+	network_get_ipaddr ip $1>/dev/null && echo "$ip"
+}
+
+iptables_init() {
+	INPUT="INPUT"
+	iptables -t filter --list zone_wan_input &>/dev/null && INPUT="zone_wan_input"
+	PREROUTING="PREROUTING"
+	iptables -t nat --list zone_wan_prerouting &>/dev/null && PREROUTING="zone_wan_prerouting"
+	[ -z "$LAN_IP" ] && {
+		LAN_IP=$(get_lan_wan_ip 'lan')
+		[ -z "$LAN_IP" ] && return 1
+	}
+	if [ "$external_access" = '1' ]; then
+		RULES_NAT="*nat
+-A $PREROUTING -p udp -m udp --dport 111 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:111
+-A $PREROUTING -p tcp -m tcp --dport 111 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:111
+-A $PREROUTING -p udp -m udp --dport 2049 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:2049
+-A $PREROUTING -p tcp -m tcp --dport 2049 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:2049
+-A $PREROUTING -p udp -m udp --dport 32777 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:32777
+-A $PREROUTING -p tcp -m tcp --dport 32777 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:32777
+-A $PREROUTING -p udp -m udp --dport 32780 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:32780
+-A $PREROUTING -p tcp -m tcp --dport 32780 -m comment --comment \"NFS\" -j DNAT --to-destination $LAN_IP:32780
+COMMIT"
+	else
+		SOURCE="-s ${LAN_IP%.*}.0/24 "
+	fi
+		RULES_FILTER="*filter
+-A $INPUT ${SOURCE}-p udp -m udp --dport 111:2049 -m comment --comment \"NFS\" -j ACCEPT
+-A $INPUT ${SOURCE}-p tcp -m tcp --dport 111:2049 -m comment --comment \"NFS\" -j ACCEPT
+-A $INPUT ${SOURCE}-p udp -m udp --dport 32777:32780 -m comment --comment \"NFS\" -j ACCEPT
+-A $INPUT ${SOURCE}-p tcp -m tcp --dport 32777:32780 -m comment --comment \"NFS\" -j ACCEPT
+COMMIT"
 	return 0
 }
 
-iptables_flush() {
-	get_lan_ip || return 1
-	iptables-restore <<-EOF || {
-		$(echo -e "$( iptables-save -t filter )" | grep -v 'NFS')
+iptables_run() {
+	[ -z "$1" -o -z "$2" ] && return 1
+	RUN_RUNLES=$(echo -e "$1"|grep -Eo '[-][A].*')
+	[ "$3" = '-D' ] && RUN_RUNLES=$(echo -e "$RUN_RUNLES"|sed -E 's/^-[AI]/-D/')
+	while read RULE
+	do
+		eval "iptables -t $2 $RULE"
+	done <<-EOF
+	$(echo -e "$RUN_RUNLES")
 	EOF
-		iptables -t filter -D INPUT -s $LAN_IP -i $WAN_IF -p tcp -m tcp --dport 111 -m comment --comment "NFS" -j ACCEPT
-		iptables -t filter -D INPUT -s $LAN_IP -i $WAN_IF -p udp -m udp --dport 111 -m comment --comment "NFS" -j ACCEPT
-		iptables -t filter -D INPUT -s $LAN_IP -i $WAN_IF -p tcp -m tcp --dport 32777:32780 -m comment --comment "NFS" -j ACCEPT
-		iptables -t filter -D INPUT -s $LAN_IP -i $WAN_IF -p udp -m udp --dport 32777:32780 -m comment --comment "NFS" -j ACCEPT
+}
+
+iptables_flush() {
+	iptables_init || return 1
+	iptables-restore <<-EOF || {
+		$(echo -e "$( iptables-save)" | grep -v 'NFS')
+	EOF
+		iptables_run "$RULES_FILTER" "filter" "-D" &>/dev/null
+		iptables_run "$RULES_NAT" "nat" "-D" &>/dev/null
 	}
 	return $?
 }
 
 iptables_restore() {
-	get_lan_ip || return 1
+	iptables_init || return 1
 	iptables-restore -n <<-EOF || {
-		*filter
-		-A INPUT -s $LAN_IP -i $WAN_IF -p tcp -m tcp --dport 111 -m comment --comment "NFS" -j ACCEPT
-		-A INPUT -s $LAN_IP -i $WAN_IF -p udp -m udp --dport 111 -m comment --comment "NFS" -j ACCEPT
-		-A INPUT -s $LAN_IP -i $WAN_IF -p tcp -m tcp --dport 32777:32780 -m comment --comment "NFS" -j ACCEPT
-		-A INPUT -s $LAN_IP -i $WAN_IF -p udp -m udp --dport 32777:32780 -m comment --comment "NFS" -j ACCEPT
-		COMMIT
+		$RULES_FILTER
+		$RULES_NAT
 	EOF
-		iptables -t filter -A INPUT -s $LAN_IP -i $WAN_IF -p tcp -m tcp --dport 111 -m comment --comment "NFS" -j ACCEPT
-		iptables -t filter -A INPUT -s $LAN_IP -i $WAN_IF -p udp -m udp --dport 111 -m comment --comment "NFS" -j ACCEPT
-		iptables -t filter -A INPUT -s $LAN_IP -i $WAN_IF -p tcp -m tcp --dport 32777:32780 -m comment --comment "NFS" -j ACCEPT
-		iptables -t filter -A INPUT -s $LAN_IP -i $WAN_IF -p udp -m udp --dport 32777:32780 -m comment --comment "NFS" -j ACCEPT
+		iptables_run "$RULES_FILTER" "filter" "-A"
+		[ "$external_access" = '1' ] && iptables_run "$RULES_NAT" "nat" "-A"
 	}
 	return $?
+}
+
+nfs_general() {
+	config_get external_access "$1" external_access '0'
 }
 
 nfs_share() {
@@ -91,21 +129,21 @@ nfs_share_start() {
 	if check_nfsd; then
 		if [ -z "$NFS_SHARE_ALL" ]; then
 			echo -e "$NFS_SHARE_ALL">/etc/exports
-			/usr/sbin/exportfs –au
 			nfs_share_stop
-		elif [ "$(echo -e $NFS_EXPORTS)" = "$(echo -e $NFS_SHARE_ALL)" ]; then
 			return 1
 		else
-			echo -e "$NFS_SHARE_ALL">/etc/exports
-			/usr/sbin/exportfs -ar
+			[ "$(echo -e $NFS_EXPORTS)" = "$(echo -e $NFS_SHARE_ALL)" ] || {
+				echo -e "$NFS_SHARE_ALL">/etc/exports
+				/usr/sbin/exportfs -ar
+			}
 		fi
 	else
 		echo -e "$NFS_SHARE_ALL">/etc/exports
 		/etc/init.d/portmap start &>/dev/null
 		/etc/init.d/nfsd start &>/dev/null
-		iptables_flush
-		iptables_restore
 	fi
+	iptables_flush
+	iptables_restore
 }
 
 nfs_share_stop() {
@@ -172,6 +210,9 @@ config_cb() {
 	local cfg="$CONFIG_SECTION"
 	config_get configname "$cfg" TYPE
 	case "$configname" in
+		general)
+			nfs_general "$cfg"
+			;;
 		share)
 			nfs_share "$cfg"
 			;;
@@ -182,7 +223,7 @@ config_cb() {
 }
 
 start() {
-	config_load $APP
+	config_load "$APP"
 	nfs_share_start
 	nfs_mount_clean
 }
@@ -197,6 +238,7 @@ restart() {
 }
 
 firewall() {
+	config_load "$APP"
 	iptables_restore
 }
 
