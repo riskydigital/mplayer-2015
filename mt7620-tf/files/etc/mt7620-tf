@@ -1,0 +1,11 @@
+mt7620-tf
+
++kmod-mmc +kmod-sdhci +kmod-sdhci-mt7620 +kmod-nls-cp437 +kmod-nls-iso8859-1 +kmod-nls-utf8
+
+
+dts
+
+sdhci@10130000 {
+status = "okay";
+};
+

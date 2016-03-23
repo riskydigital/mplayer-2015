@@ -49,6 +49,10 @@ luci-app-cpulimit  cpu限制使用率
 
 20160308 更新了 luci-app-nfs (和samba一样的东西 不过比samba节省资源)   添加了优酷路由宝插件 2.11版本
 
+20160323 添加mt7620的存储卡的Makefile
+
+
+
 
 
 
