@@ -3,9 +3,19 @@ mt7620-tf
 +kmod-mmc +kmod-sdhci +kmod-sdhci-mt7620 +kmod-nls-cp437 +kmod-nls-iso8859-1 +kmod-nls-utf8
 
 
-dts
+dtsÌí¼ÓÏÂÃæ
 
 sdhci@10130000 {
 status = "okay";
 };
+
+
+ÃüÁî
+make kernel_menuconfig
+
+Device Drivers  ---> MMC/SD/SDIO card support  --->MMC block device driver 
+
+File systems  ---> Add firmware-provided memory map to sysfs
+
+
 
