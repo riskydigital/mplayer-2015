@@ -1,0 +1,49 @@
+#!/bin/sh
+# Copyright (C) 2011 OpenWrt.org
+
+ifdisk=`echo $DEVPATH|grep -e target -e mmcblk0p|grep '[0-9]$'`
+
+if [ "$ifdisk" ]; then
+	device=`basename $DEVPATH`
+	
+	disk_mounted=`mount|grep "/dev/$device"`
+
+	case "$ACTION" in
+		add)
+			if [ -z "$disk_mounted" ]; then
+				mkdir -p /tmp/mnt/$device
+				# vfat & ntfs-3g check
+				if [ `which fdisk` ]; then
+					isntfs=`blkid | grep $device | grep "TYPE=\"ntfs\""`
+					isvfat=`blkid | grep $device | grep "TYPE=\"vfat\""`
+					isext4=`blkid | grep $device | grep "TYPE=\"ext"`
+					isfuse=`lsmod | grep fuse`
+					isntfs3g=`which ntfs-3g`
+				else
+					isntfs=""
+					isvfat=""
+					isext4=""
+				fi
+				
+				# mount with ntfs-3g if possible, else with default mount
+				if [ "$isntfs" -a "$isfuse" -a "$isntfs3g" ]; then
+					ntfs-3g -o nls=utf8 /dev/$device /tmp/mnt/$device
+					logger OYE-MOUNT-USB-DISK File System: /dev/$device ntfs
+				elif [ "$isvfat" ]; then
+					mount -t vfat -o iocharset=utf8 /dev/$device /tmp/mnt/$device
+					logger OYE-MOUNT-USB-DISK File System: /dev/$device vfat
+				elif [ "$isext4" ]; then
+					mount -t ext4 /dev/$device /tmp/mnt/$device
+					logger OYE-MOUNT-USB-DISK File System: /dev/$device Linux ext
+				else
+					mount /dev/$device /tmp/mnt/$device
+					logger OYE-MOUNT-USB-DISK File System: /dev/$device Other
+				fi
+			fi
+		;;
+		remove)
+			umount /dev/$device
+		;;
+	esac
+fi
+
