@@ -1,0 +1,64 @@
+#!/bin/sh
+# 优酷存储盘
+youku_disk="/tmp/storage/mmcblk0p2/"
+
+if [ ! -z $(pidof ikuacc) ]; then
+
+  local count=-1
+  local view_mode=0
+local i=0
+  while [ "$i" -le "20" ]
+  do
+i=$(($i+1))
+    local wan="$(uci get -q network.wan.ifname)"
+
+    local rx1="$(cat /proc/net/dev|grep ${wan}|awk '{print$2}')"
+    local tx1="$(cat /proc/net/dev|grep ${wan}|awk '{print$10}')"
+
+    read cpu a b c previdle rest < /proc/stat
+    local prevtotal=$((a+b+c+previdle))
+
+    sleep 1
+
+    local rx2="$(cat /proc/net/dev|grep ${wan}|awk '{print $2}')"
+    local tx2="$(cat /proc/net/dev|grep ${wan}|awk '{print$10}')"
+
+    local rx3="$(cat /proc/net/dev|grep br-lan|awk '{print $2}')"
+    local tx3="$(cat /proc/net/dev|grep br-lan|awk '{print$10}')"
+
+rx3=$((rx2-rx3))
+tx3=$((tx2-tx3))
+
+    read cpu a b c idle rest < /proc/stat
+    local total=$((a+b+c+idle))
+
+    local dl_size="$(( $(( rx2 - rx1 )) / 1000 ))"
+    local up_size="$(( $(( tx2 - tx1 )) / 1000 ))"
+    printf "下行:%4sKB/s | 上行:%4sKB/s%23s\n" ${dl_size} ${up_size} ''
+
+    if [ ${count} -ge 10 -o ${count} -eq -1 ]; then
+      count=0
+      if [ ${view_mode} -eq 0 ]; then
+        local total_dl_size="$(echo $rx3|awk '{printf "%.2f", $0 / 1000 / 1000 / 1000}')"
+        local total_up_size="$(echo $tx3|awk '{printf "%.2f", $0 / 1000 / 1000 / 1000}')"
+        view_mode=1
+      else
+        local use_cpu="$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))%"
+        local uptime="$(uptime|awk -F ',' '{printf $1}'|awk '{printf $3}')"
+        view_mode=0
+      fi
+      local connected="$(netstat -antp|grep ikuacc|wc -l)"
+      #local buffered_size="$(du -h ${youku_disk}youku/data/youku/youkudisk|awk '{print $1}')"
+    else
+      let count=${count}+1
+    fi
+
+    if [ ${view_mode} -eq 0 ]; then
+      printf " \033[40;37;7mCPU:%8s | 启动:%7s | 连接:%s | 缓存:%s \033[0m\r" ${use_cpu} ${uptime} ${connected} #${buffered_size}
+    else
+      printf " \033[40;37;7m总下载:%4sG | 总上行:%sG | 连接:%s | 缓存:%s \033[0m\r" ${total_dl_size} ${total_up_size} ${connected} #${buffered_size}
+    fi
+  done
+else
+  echo "ikuacc进程未启动"
+fi

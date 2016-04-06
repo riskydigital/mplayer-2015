@@ -1,0 +1,27 @@
+mt7620-tf
+
++kmod-mmc +kmod-sdhci +kmod-sdhci-mt7620 +kmod-nls-cp437 +kmod-nls-iso8859-1 +kmod-nls-utf8
+
+
+y1.dtsi添加下面
+
+sdhci@10130000 {
+status = "okay";
+};
+
+
+
+
+
+
+
+
+命令---好像不需要下面的
+make kernel_menuconfig
+
+Device Drivers  ---> MMC/SD/SDIO card support  --->MMC block device driver 
+
+File systems  ---> Add firmware-provided memory map to sysfs
+
+
+

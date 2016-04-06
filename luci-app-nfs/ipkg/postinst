@@ -1,0 +1,7 @@
+#!/bin/sh
+
+[ -z "${IPKG_INSTROOT}" ] && {
+	( . /etc/uci-defaults/luci-nfs ) && rm -f /etc/uci-defaults/luci-nfs
+}
+
+exit 0

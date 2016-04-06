@@ -1,0 +1,15 @@
+﻿
+
+
+
+
+./po2lmo uhttpd.po uhttpd.lmo
+
+
+
+
+
+
+
+
+
