@@ -1,7 +1,0 @@
-#!/bin/sh
-
-/etc/init.d/automount start
-
-rm -f $0
-
-exit 0
