@@ -1,3 +1,10 @@
+#Enable bittorrent support 支持aria2迅雷种子
+#Network-> File Transfer -> aria2 -> Aria2 configuration---
+
+#Enable metalink support 支持磁力链
+#Network-> File Transfer -> aria2 -> Aria2 configuration---
+
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-aria2
