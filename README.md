@@ -51,7 +51,7 @@ luci-app-cpulimit  cpu限制使用率
 
 20160406 修改了 luci-app-autoap-ramips-1.1.0---autoAP
 
-
+20160408 添加 a-jichuzujian-oye
 
 
 
