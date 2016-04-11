@@ -18,7 +18,7 @@ define Package/luci-app-vsftpd
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=LuCI Support for uhttpd downloading app.
-  DEPENDS:=+vsftpd
+  DEPENDS:=+vsftpd-gg +vsftpd-tls
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
