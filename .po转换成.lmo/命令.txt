@@ -1,9 +1,9 @@
 ﻿
 
 
+修改po2lmo权限 可以执行
 
-
-./po2lmo uhttpd.po uhttpd.lmo
+sudo ./po2lmo 1.po 1.lmo
 
 
 
