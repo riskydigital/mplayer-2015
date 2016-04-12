@@ -24,7 +24,7 @@ define Package/vsftpd/Default
   SUBMENU:=File Transfer
   SECTION:=net
   CATEGORY:=Network
-  TITLE:=A fast and secure FTP server
+  TITLE:=guoguo---A fast and secure FTP server
   URL:=http://vsftpd.beasts.org/
   MAINTAINER:=Cezary Jackiewicz <cezary@eko.one.pl>
   DEPENDS:=+libuci
