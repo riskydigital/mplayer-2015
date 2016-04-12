@@ -48,7 +48,7 @@ define Package/vsftpd/config
 config VSFTPD_USE_UCI_SCRIPTS
 	bool "Uses UCI scripts"
 	depends on PACKAGE_vsftpd || PACKAGE_vsftpd-tls
-	default n
+	default y
 endef
 
 define Package/vsftpd/conffiles
