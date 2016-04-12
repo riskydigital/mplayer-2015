@@ -20,7 +20,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSI
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/vsftpd-gg/Default
+define Package/vsftpd-gg
   SUBMENU:=File Transfer
   SECTION:=net
   CATEGORY:=Network
@@ -31,31 +31,31 @@ define Package/vsftpd-gg/Default
 endef
 
 
-define Package/vsftpd-gg
-$(call Package/vsftpd-gg/Default)
+define Package/vsftpd
+$(call Package/vsftpd/Default)
   VARIANT:=notls
   TITLE+= (no TLS)
 endef
 
 define Package/vsftpd-tls
-$(call Package/vsftpd-gg/Default)
+$(call Package/vsftpd/Default)
   VARIANT:=tls
   TITLE+= (TLS)
   DEPENDS+=+libopenssl
 endef
 
-define Package/vsftpd-gg/config
+define Package/vsftpd/config
 config VSFTPD_USE_UCI_SCRIPTS
 	bool "Uses UCI scripts"
 	depends on PACKAGE_vsftpd || PACKAGE_vsftpd-tls
-	default y
+	default n
 endef
 
-define Package/vsftpd-gg/conffiles
+define Package/vsftpd/conffiles
 /etc/vsftpd.conf
 endef
 
-Package/vsftpd-tls/conffiles=$(Package/vsftpd-gg/conffiles)
+Package/vsftpd-tls/conffiles=$(Package/vsftpd/conffiles)
 
 ifneq ($(CONFIG_USE_MUSL),)
   NLSSTRING:=-lcrypt
@@ -87,7 +87,7 @@ ifeq ($(BUILD_VARIANT),tls)
  endef
 endif
 
-define Package/vsftpd-gg/install/default
+define Package/vsftpd/install/default
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/etc
@@ -95,8 +95,8 @@ define Package/vsftpd-gg/install/default
 endef
 
 ifeq ($(CONFIG_VSFTPD_USE_UCI_SCRIPTS),y)
-define Package/vsftpd-gg/install
-$(call Package/vsftpd-gg/install/default, $(1))
+define Package/vsftpd/install
+$(call Package/vsftpd/install/default, $(1))
 	$(INSTALL_BIN) ./files/$(PKG_NAME)-uci.init $(1)/etc/init.d/$(PKG_NAME)
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_BIN) ./files/vsftpd.uci $(1)/etc/config/vsftpd
@@ -104,14 +104,14 @@ $(call Package/vsftpd-gg/install/default, $(1))
 	$(INSTALL_BIN) ./files/vsftpd_prepare $(1)/usr/sbin
 endef
 else
-define Package/vsftpd-gg/install
-$(call Package/vsftpd-gg/install/default, $(1))
+define Package/vsftpd/install
+$(call Package/vsftpd/install/default, $(1))
 	$(INSTALL_CONF) ./files/$(PKG_NAME).conf $(1)/etc/$(PKG_NAME).conf
 	$(INSTALL_BIN) ./files/$(PKG_NAME).init $(1)/etc/init.d/$(PKG_NAME)
 endef
 endif
 
-Package/vsftpd-tls/install=$(Package/vsftpd-gg/install)
+Package/vsftpd-tls/install=$(Package/vsftpd/install)
 
 $(eval $(call BuildPackage,vsftpd))
 $(eval $(call BuildPackage,vsftpd-tls))
