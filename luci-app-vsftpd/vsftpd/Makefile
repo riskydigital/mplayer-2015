@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=vsftpd-gg
+PKG_NAME:=vsftpd
 PKG_VERSION:=3.0.3
 PKG_RELEASE:=1
 
@@ -20,7 +20,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSI
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/vsftpd-gg
+define Package/vsftpd/Default
   SUBMENU:=File Transfer
   SECTION:=net
   CATEGORY:=Network
