@@ -1,0 +1,12 @@
+config main "main"
+	option enable '1'
+	option type '1'
+	option dayhour '5'
+	option dayminute '0'
+	option weekSelect '1'
+	option weekhour '0'
+	option weekminute '0'
+	option monSelect '0'
+	option monhour '0'
+	option monminute '0'
+

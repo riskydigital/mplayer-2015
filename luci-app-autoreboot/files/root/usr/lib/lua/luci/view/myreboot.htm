@@ -1,0 +1,223 @@
+<%#
+LuCI - Lua Configuration Interface
+Copyright 2008 Steven Barth <steven@midlink.org>
+Copyright 2008 Jo-Philipp Wich <xm@leipzig.freifunk.net>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+$Id$
+
+http://192.168.178.1/cgi-bin/luci/;stok=4fdcea48aa2704c0ff55d2d96af6e87a/admin/autoreboot/cfg_test
+
+-%>
+<%
+	require "luci.fs"                                                                                                      
+        require "luci.tools.status"
+		local typ = luci.sys.exec("uci get autoreboot.main.type");
+        local daymin = luci.sys.exec("uci get autoreboot.main.dayminute");
+		local dayhour = luci.sys.exec("uci get autoreboot.main.dayhour");
+		local w_select = luci.sys.exec("uci get autoreboot.main.weekSelect");                                                  
+        local weekhours = luci.sys.exec("uci get autoreboot.main.weekhour");                                                   
+        local weekmin = luci.sys.exec("uci get autoreboot.main.weekminute");                                                   
+        local m_select = luci.sys.exec("uci get autoreboot.main.monSelect");                                                   
+        local monhours = luci.sys.exec("uci get autoreboot.main.monhour");                                                     
+        local monmin = luci.sys.exec("uci get autoreboot.main.monminute");
+
+%>
+
+<%+header%>
+<h2><a id="content" name="content"><%:自动重启%></a></h2>
+<h3><%:重启%></h3>
+<p><%:配置自动重启%></p>
+
+<script type="text/javascript" src="/luci-static/resources/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+function changeSelect(obj){
+		var dayObj = document.getElementById("dayDiv");
+		var weekObj = document.getElementById("weekDiv");
+		var monthObj = document.getElementById("monthDiv");
+		if (obj.value == "1") {
+			dayObj.style.display = "block";
+			weekObj.style.display = "none";
+			monthObj.style.display = "none";
+		} else if (obj.value == "2") {
+			dayObj.style.display = "none";
+			weekObj.style.display = "block";
+			monthObj.style.display = "none";
+		} else if (obj.value == "3") {
+			dayObj.style.display = "none";
+			weekObj.style.display = "none";
+			monthObj.style.display = "block";
+		} else {
+			dayObj.style.display = "none";
+			weekObj.style.display = "none";
+			monthObj.style.display = "none";
+		}
+}
+
+function r_changeSelect(value){
+		var dayObj = document.getElementById("dayDiv");
+		var weekObj = document.getElementById("weekDiv");
+		var monthObj = document.getElementById("monthDiv");
+		if (value == "1") {
+			dayObj.style.display = "block";
+			weekObj.style.display = "none";
+			monthObj.style.display = "none";
+        document.getElementById("dayHour").value = <%=dayhour%>;                                                                     
+        document.getElementById("dayMinute").value = <%=daymin%>;
+		} else if (value == "2") {
+			dayObj.style.display = "none";
+			weekObj.style.display = "block";
+			monthObj.style.display = "none";
+			document.getElementById("weekSelect").value = <%=w_select%>;
+			document.getElementById("weekHour").value = <%=weekhours%>;		
+			document.getElementById("weekMinute").value = <%=weekmin%>;
+		} else if (value == "3") {
+			dayObj.style.display = "none";
+			weekObj.style.display = "none";
+			monthObj.style.display = "block";
+			document.getElementById("monSelect").value = <%=m_select%>;
+			document.getElementById("monHour").value = <%=monhours%>;                                                                     
+			document.getElementById("monMinute").value = <%=monmin%>;
+		} else {
+			dayObj.style.display = "none";
+			weekObj.style.display = "none";
+			monthObj.style.display = "none";
+		}
+}
+</script>
+<script type="text/javascript">	
+jQuery(document).ready(function ($) {
+
+		var dayObj = document.getElementById("dayDiv");
+		var weekObj = document.getElementById("weekDiv");
+		var monthObj = document.getElementById("monthDiv");
+		document.getElementById("restartMode").value = <%=typ%>;
+		r_changeSelect(<%=typ%>);
+	
+	$("#down_apply").click(function(){
+		var data="";
+		var selectText=$('#restartMode').val();
+		if (selectText == "1"){
+			if($('#dayHour').val() == null || $('#dayHour').val() == "" || $('#dayHour').val() > 24 ){
+				alert("请输入正确的小时数！");
+				$('#dayHour').focus();
+				return;
+			}
+			if($('#dayMinute').val() == null || $('#dayMinute').val() == "" || $('#dayMinute').val() > 60 ){
+				alert("请输入正确的分钟数！");
+				$('#dayMinute').focus();
+				return;
+			}
+			var dayHour=$('#dayHour').val();
+			var dayMinute=$('#dayMinute').val();
+			data="type=1&dayHour="+dayHour+"&dayMinute="+dayMinute;
+		}else if (selectText == "2"){
+			if($('#weekHour').val() == null || $('#weekHour').val() == "" || $('#weekHour').val() > 24 ){
+				alert("请输入正确的小时数！");
+				$('#weekHour').focus;
+				return;
+			}
+			if($('#weekMinute').val() == null || $('#weekMinute').val() == "" || $('#weekMinute').val() > 60 ){
+				alert("请输入正确的分钟数！");
+				$('#weekMinute').focus();
+				return;
+			}
+			var weekSelect=$('#weekSelect').val();
+			var weekHour=$('#weekHour').val();
+			var weekMinute=$('#weekMinute').val();
+			data="type=2&weekSelect="+weekSelect+"&weekHour="+weekHour+"&weekMinute="+weekMinute;
+		}else if (selectText == "3"){
+			if($('#monHour').val() == null || $('#monHour').val == "" || $('#monHour').val() > 24 ){
+				alert("请输入正确的小时数！");
+				$('#monHour').focus;
+				return;
+			}
+			if($('#monMinute').val() == null || $('#monMinute').val() == "" || $('#monMinute').val() > 60 ){
+				alert("请输入正确的分钟数！");
+				$('#monMinute').focus();
+				return;
+			}
+			if($('#monSelect').val() == null || $('#monSelect').val() == "" || $('#monSelect').val() > 31 ){
+				alert("请输入正确的日期！");
+				$('#monSelect').focus();
+				return;
+			}
+			var monSelect=$('#monSelect').val();
+			var monHour=$('#monHour').val();
+			var monMinute=$('#monMinute').val();
+			data="type=3&monSelect="+monSelect+"&monHour="+monHour+"&monMinute="+monMinute;
+		}else{
+			data="type=none"
+		}
+
+			$.ajax({
+				type : "POST",
+				url :'<%=controller%>/admin/autoreboot/cfg_test?'+data,
+				dateType : 'json',
+				success : function(rs){
+					alert("设置成功！");
+					return true;
+				},
+				error :function(e){
+					alert("数据处理失败！");
+					return false;
+				}
+			});
+	})
+})
+	
+</script>
+
+	<select id="restartMode" name="restartMode" style="width: 100px;" onchange="changeSelect(this);">
+		<option value="0" selected>--关闭--</option>
+		<option value="1" id="daysreboot" >按天重启</option>
+		<option value="2" id="weeksreboot" >按周重启</option>
+		<option value="3" id="monsreboot" >按月重启</option>	
+	</select>
+	<br />
+	</br>
+	</br>
+	<div id="dayDiv" style="display: none;">
+		小时
+		<input type="text" id="dayHour" class="input" onchange="cbi_d_update(this.id)" value="" name="dayHour"  size="5" /></br>
+		分钟
+		<input type="text" id="dayMinute" class="input" onchange="cbi_d_update(this.id)" value="" name="dayMinute"  size="5" />
+		
+	</div>
+	<div id="weekDiv" style="display: none;">
+		星期
+		<select id="weekSelect" name="weekSelect" onchange="cbi_d_update(this.id)" style="width: 100px;">
+			<option value="1">星期一</option>
+			<option value="2">星期二</option>
+			<option value="3">星期三</option>
+			<option value="4">星期四</option>
+			<option value="5">星期五</option>
+			<option value="6">星期六</option>
+			<option value="0">星期天</option>
+		</select></br>
+		小时
+		<input type="text" id="weekHour" onchange="cbi_d_update(this.id)" name="weekHour" value="" size="5" /></br>
+		分钟
+		<input type="text" id="weekMinute" onchange="cbi_d_update(this.id)" name="weekMinute" value="" size="5" />
+	</div>
+	<div id="monthDiv" style="display: none;">
+		日期
+		<input type="text" id="monSelect" onchange="cbi_d_update(this.id)" name="monSelect" value="" size="5" /></br>
+		小时
+		<input type="text" id="monHour" onchange="cbi_d_update(this.id)" name="monHour" value="" size="5" /></br>
+		分钟
+		<input type="text" id="monMinute" onchange="cbi_d_update(this.id)" name="monMinute" value="" size="5" />
+	</div>
+
+
+
+	<input class="cbi-button cbi-button-apply" id="down_apply" type="button" value="<%:保存&运用%>" style="float: right"  />
+<%+footer%>
+
+
+

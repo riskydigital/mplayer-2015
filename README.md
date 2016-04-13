@@ -53,7 +53,7 @@ luci-app-cpulimit  cpu限制使用率
 
 20160411 修改了 luci-app-xunlei3 luci-app-vsftpd (查看 Uses UCI scripts 选择了没有)
 
-
+20160413 添加 luci-app-autoreboot(按 月 日 时 分 重启路由器)  luci-app-ipk(本地安装ipk)
 
 
 

@@ -1,0 +1,75 @@
+#!/bin/sh /etc/rc.common
+START=50
+
+run_reboot()
+{                                                                                                       
+     	local enable1
+     	local enable2
+	local enable3
+	config_get_bool enable1 $1 enable1
+	config_get_bool enable2 $1 enable2
+	config_get_bool enable3 $1 enable3
+	local day
+	local weeks
+	local mons
+	local minute1
+	local minute2
+	local minute3
+	local hour1
+	local hour2
+	local hour3
+	
+	echo "0" >/etc/crontabs/error
+	crontab -r
+	echo "0 0-6/2 * * * speedtest_cli.py >>/tmp/speedtest_cli.log 2>&1 &" >/etc/crontabs/root
+	echo "0 10 * * * speedtest_cli.py >>/tmp/speedtest_cli.log 2>&1 &" >>/etc/crontabs/root
+	echo "30 12 * * * speedtest_cli.py >>/tmp/speedtest_cli.log 2>&1 &" >>/etc/crontabs/root
+	echo "30 16 * * * speedtest_cli.py >>/tmp/speedtest_cli.log 2>&1 &" >>/etc/crontabs/root
+	echo "0 19 * * * speedtest_cli.py >>/tmp/speedtest_cli.log 2>&1 &" >>/etc/crontabs/root
+
+	if [ $enable1 ]&&[ ! -n "$enable2" ]&&[ ! -n "$enable3" ];then
+		config_get minute1 $1 minute1
+		config_get hour1 $1 hour1
+		echo "$minute1 $hour1 * * * reboot &" >>/etc/crontabs/root
+		echo "Auto REBOOT has started."
+                /etc/init.d/cron restart
+	elif [ $enable2 ]&&[ ! -n "$enable1" ]&&[ ! -n "$enable3" ];then
+		config_get minute2 $1 minute2 
+		config_get hour2 $1 hour2
+		config_get weeks $1 weeks
+		echo "$minute2 $hour2 * * $weeks reboot &" >>/etc/crontabs/root
+		echo "Auto REBOOT has started."
+                /etc/init.d/cron restart
+	elif [ $enable3 ]&&[ ! -n "$enable1" ]&&[ ! -n "$enable2" ];then
+		config_get minute3 $1 minute3
+		config_get hour3 $1 hour3
+		config_get mons $1 mons
+		echo "$minute3 $hour3 $mons * * reboot &" >>/etc/crontabs/root 
+		echo "Auto REBOOT has started."
+                /etc/init.d/cron restart
+	else
+		echo "1" >/etc/crontabs/error 
+		/etc/init.d/cron restart
+	fi
+}
+
+start()
+{
+	config_load autoreboot
+	config_foreach run_reboot login
+}
+
+stop()
+{
+	echo "Auto REBOOT has stoped."
+}
+
+
+
+
+
+
+
+
+
+
