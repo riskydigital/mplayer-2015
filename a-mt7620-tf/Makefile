@@ -10,14 +10,14 @@ define Package/a-mt7620-tf
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
-  TITLE:=a-a-mt7620-tf
+  TITLE:=LuCI a-mt7620-tf
   DEPENDS:=+kmod-mmc +kmod-sdhci +kmod-sdhci-mt7620
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
 
 define Package/a-mt7620-tf/description
-jichuzujian
+LuCI a-mt7620-tf
 endef
 
 define Build/Compile
