@@ -18,7 +18,7 @@ define Package/uci-app-minidlna
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=LuCI minidlna
-  DEPENDS:=minidlna
+  DEPENDS:=+minidlna
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
