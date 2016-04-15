@@ -1,8 +1,14 @@
+#
+# Copyright (C) 2006-2014 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=a-mt7620-tf
-PKG_VERSION:=long1983
-PKG_RELEASE:=1.1.0
+PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -10,14 +16,12 @@ define Package/a-mt7620-tf
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
-  TITLE:=a-mt7620-tf
-  DEPENDS:=+kmod-mmc +kmod-sdhci +kmod-sdhci-mt7620
-  PKGARCH:=all
-  MAINTAINER:=long1983
+  DEPENDS:=+kmod-sdhci +kmod-sdhci-mt7620 +kmod-mmc
+  TITLE:=LuCI support for the a-mt7620-tf
 endef
 
 define Package/a-mt7620-tf/description
-a-mt7620-tf
+	LuCI a-mt7620-tf,but the youku's LuCI only chinese
 endef
 
 define Build/Compile
