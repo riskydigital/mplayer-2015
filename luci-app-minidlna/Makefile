@@ -7,13 +7,13 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=uci-app-minidlna
+PKG_NAME:=luci-app-minidlna
 PKG_VERSION:=long1983
 PKG_RELEASE:=
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/uci-app-minidlna
+define Package/luci-app-minidlna
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
@@ -23,15 +23,15 @@ define Package/uci-app-minidlna
   MAINTAINER:=long1983
 endef
 
-define Package/uci-app-minidlna/description
+define Package/luci-app-minidlna/description
 minidlna
 endef
 
 define Build/Compile
 endef
 
-define Package/uci-app-minidlna/install
+define Package/luci-app-minidlna/install
 	$(CP) ./files/* $(1)
 endef
 
-$(eval $(call BuildPackage,uci-app-minidlna))
+$(eval $(call BuildPackage,luci-app-minidlna))
