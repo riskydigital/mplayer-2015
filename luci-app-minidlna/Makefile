@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-minidlna
 PKG_VERSION:=long1983
-PKG_RELEASE:=
+PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -17,14 +17,14 @@ define Package/luci-app-minidlna
   SECTION:=LuCI
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
-  TITLE:=LuCI minidlna
-  DEPENDS:=+minidlna
+  TITLE:=LuCI Support for luci-app-minidlna downloading app.
+  DEPENDS:=+vsftpd
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
 
 define Package/luci-app-minidlna/description
-minidlna
+luci-app-minidlna configuration module.Include init script and auto update app
 endef
 
 define Build/Compile
