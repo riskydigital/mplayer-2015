@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-minidlna
 PKG_VERSION:=long1983
-PKG_RELEASE:=1.1.0
+PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -17,7 +17,7 @@ define Package/luci-app-minidlna
 endef
 
 define Package/luci-app-minidlna/description
-luci-app-minidlna
+  luci-app-minidlna
 endef
 
 define Build/Compile
