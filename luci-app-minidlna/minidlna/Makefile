@@ -36,7 +36,7 @@ define Package/minidlna
 endef
 
 define Package/minidlna/description
-  MiniDLNA (aka ReadyDLNA) is server software with the aim of
+  MiniDLNA-gg (aka ReadyDLNA) is server software with the aim of
   being fully compliant with DLNA/UPnP-AV clients.
 endef
 
