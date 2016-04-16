@@ -11,7 +11,7 @@ define Package/a-luci-minidlna
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=a-luci-minidlna
-  DEPENDS:=+libffmpeg
+  DEPENDS:=+libffmpeg-full
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
