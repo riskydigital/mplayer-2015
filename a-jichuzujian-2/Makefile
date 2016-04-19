@@ -11,7 +11,7 @@ define Package/a-jichuzujian-2
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=a-jichuzujian-2
-  DEPENDS:=+luci-i18n-chinese +block-mount +kmod-fs-ext4 +kmod-fs-ntfs +kmod-fs-vfat +kmod-nls-cp437 +kmod-nls-iso8859-1 +kmod-nls-utf8 +kmod-usb-storage +kmod-usb-storage-extras +kmod-usb2 +kmod-usb3 +kmod-usb-ohci +kmod-usb-uhci +ntfs-3g +usbutils +luci +restorefactory
+  DEPENDS:=+luci-i18n-chinese +block-mount +kmod-fs-ext4 +kmod-fs-ntfs +kmod-fs-vfat +kmod-nls-cp437 +kmod-nls-iso8859-1 +kmod-nls-utf8 +kmod-usb-storage +kmod-usb-storage-extras +kmod-usb2 +kmod-usb-ohci +kmod-usb-uhci +ntfs-3g +usbutils +luci +restorefactory
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
