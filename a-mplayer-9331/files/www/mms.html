@@ -1,0 +1,54 @@
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>网络收音机</title> 
+</head> 
+<div style="float:left">
+<script>
+function sendSer(value){
+document.getElementById("ser").src="http://192.168.7.1/cgi-bin/radio?"+value+Math.random();
+}
+function setchannel()
+{
+if(cnum.value == 1)
+sendSer('C1');
+if(cnum.value == 2)
+sendSer('C2');
+if(cnum.value == 3)
+sendSer('C3');
+if(cnum.value == 4)
+sendSer('C4');
+if(cnum.value == 5)
+sendSer('C5');
+if(cnum.value == 6)
+sendSer('C6');
+if(cnum.value == 7)
+sendSer('C7');
+if(cnum.value == 8)
+sendSer('C8'); 
+if(cnum.value == 9)
+sendSer('C9'); 
+}
+</script>
+<body>
+ 
+<table>
+<iframe id='ser' name='ser' ></iframe> 
+<tr><td><select name="cnum" id="cnum"> 
+<OPTION value="1">苏州电台交通广播</OPTION>
+<OPTION value="2">北部湾之声</OPTION>
+<OPTION value="3">950MusicRadio</OPTION>
+<OPTION value="4">新闻综合广播</OPTION>
+<OPTION value="5">广西交通台</OPTION>
+<OPTION value="6">中央电台经济之声</OPTION>
+<OPTION value="7">国际电台都市流行</OPTION>
+<OPTION value="8">中国经典金曲台</OPTION> 
+<OPTION value="9">970女主播电台</OPTION> 
+</select></td><td/>
+<input type="button" id="btn" value="收听" onclick="setchannel(this)" />
+<input type="button" id="btn" value="停止" onclick="sendSer('C0')" /> 
+</table>
+
+</div>
+</body>
+</html>

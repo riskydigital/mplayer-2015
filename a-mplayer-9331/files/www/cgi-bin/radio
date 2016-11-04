@@ -1,0 +1,18 @@
+#!/usr/bin/lua
+
+
+action = {
+  ["C0"] = function (x) print("\r\n"); os.execute("killall mplayer"); print("Radio off") end, 
+  ["C1"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mmst://58.211.0.53/1048"); print("苏州电台交通广播") end,
+  ["C2"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://222.216.222.9/964"); print("北部湾之声") end,
+  ["C3"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://222.216.222.9/950"); print("950MusicRadio") end,
+  ["C4"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://222.216.222.9/910"); print("新闻综合广播") end,
+  ["C5"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://222.216.222.9/1003"); print("广西交通台") end,
+  ["C6"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://mms.cnr.cn//cnr2?MTUjMCM"); print("中央电台经济之声") end,
+  ["C7"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://live.cri.cn/pop"); print("国际电台都市流行") end,
+  ["C8"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://live.cri.cn/oldies"); print("中国经典金曲台") end,
+  ["C9"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mms://222.216.222.9/970"); print("970女主播电台") end,  
+
+}
+
+action[string.sub(os.getenv("QUERY_STRING"),1,2)](string.sub(os.getenv("QUERY_STRING"),3,5))
