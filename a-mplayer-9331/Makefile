@@ -11,7 +11,7 @@ define Package/a-mplayer-9331
   CATEGORY:=LuCI
   SUBMENU:=3. Applications
   TITLE:=a-mplayer-9331
-  DEPENDS:=+kmod-usb-audio +libiconv-full +alsa-utils +zlib +libmad +screen
+  DEPENDS:=+kmod-sound-core +kmod-usb-audio +libiconv-full +alsa-utils +zlib +libmad +screen
   PKGARCH:=all
   MAINTAINER:=long1983
 endef
