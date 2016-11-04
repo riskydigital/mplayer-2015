@@ -55,7 +55,7 @@ luci-app-cpulimit  cpu限制使用率
 
 20160413 添加 luci-app-autoreboot(按 月 日 时 分 重启路由器)  luci-app-ipk(本地安装ipk)
 
-
+20161104 添加 a-mplayer-9331 luci-app-autoap-ramips-1.3.0 luci-app-autoap-ar71xx-1.3.0
 
 
 
