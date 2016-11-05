@@ -28,6 +28,30 @@ if(cnum.value == 8)
 sendSer('C8'); 
 if(cnum.value == 9)
 sendSer('C9'); 
+if(cnum.value == 10)
+sendSer('D1');
+if(cnum.value == 11)
+sendSer('D2');
+if(cnum.value == 12)
+sendSer('D3');
+if(cnum.value == 13)
+sendSer('D4');
+if(cnum.value == 14)
+sendSer('D5');
+if(cnum.value == 15)
+sendSer('D6');
+if(cnum.value == 16)
+sendSer('D7');
+if(cnum.value == 17)
+sendSer('D8');
+if(cnum.value == 18)
+sendSer('D9'); 
+if(cnum.value == 19)
+sendSer('E1');
+if(cnum.value == 20)
+sendSer('E2');
+if(cnum.value == 21)
+sendSer('E3'); 
 }
 </script>
 <body>
@@ -36,14 +60,26 @@ sendSer('C9');
 <iframe id='ser' name='ser' ></iframe> 
 <tr><td><select name="cnum" id="cnum"> 
 <OPTION value="1">苏州电台交通广播</OPTION>
-<OPTION value="2">北部湾之声</OPTION>
-<OPTION value="3">950MusicRadio</OPTION>
-<OPTION value="4">新闻综合广播</OPTION>
-<OPTION value="5">广西交通台</OPTION>
-<OPTION value="6">中央电台经济之声</OPTION>
-<OPTION value="7">国际电台都市流行</OPTION>
-<OPTION value="8">中国经典金曲台</OPTION> 
-<OPTION value="9">970女主播电台</OPTION> 
+<OPTION value="2">苏州电台新闻广播</OPTION>
+<OPTION value="3">苏州电台生活广播</OPTION>
+<OPTION value="4">河北新闻广播</OPTION>
+<OPTION value="5">河北经济广播</OPTION>
+<OPTION value="6">河北交通广播</OPTION>
+<OPTION value="7">河北文艺广播</OPTION>
+<OPTION value="8">河北生活广播</OPTION> 
+<OPTION value="9">河北音乐广播</OPTION>
+<OPTION value="10">河北农村广播</OPTION>
+<OPTION value="11">河北旅游文化广播</OPTION>
+<OPTION value="12">厦门电台音乐广播</OPTION>
+<OPTION value="13">厦门电台1</OPTION>
+<OPTION value="14">厦门电台2</OPTION>
+<OPTION value="15">厦门电台3</OPTION>
+<OPTION value="16">厦门电台4</OPTION>
+<OPTION value="17">厦门电台5</OPTION>
+<OPTION value="18">厦门电台6</OPTION> 
+<OPTION value="19">厦门电台7</OPTION> 
+<OPTION value="20">厦门电台8</OPTION>
+<OPTION value="21">海峡之声</OPTION> 
 </select></td><td/>
 <input type="button" id="btn" value="收听" onclick="setchannel(this)" />
 <input type="button" id="btn" value="停止" onclick="sendSer('C0')" /> 
