@@ -1,9 +1,20 @@
 <html>
 <head> 
 <meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
 <title>网络收音机</title> 
+<style> 
+.top {
+width:300px;
+height:100;
+margin:100 auto;
+ 
+ }
+</style> 
 </head> 
-<div style="float:left">
+<body bgcolor="#C9EDCD">
+
+<div class='top'>
 <script>
 function sendSer(value){
 document.getElementById("ser").src="http://192.168.7.1/cgi-bin/radio?"+value+Math.random();
@@ -54,11 +65,25 @@ if(cnum.value == 21)
 sendSer('E3'); 
 }
 </script>
-<body>
+
  
 <table>
-<iframe id='ser' name='ser' ></iframe> 
-<tr><td><select name="cnum" id="cnum"> 
+<iframe id='ser' name='ser' style='width:222px;font-size:24px;height="50';></iframe> 
+<tr><td/>
+<input type="button" id="btn" value="收听" onClick="setchannel(this)" style="width:100px;height:50px;background:LightGreen;color:white;font-size:24px;"/>
+<input type="button" id="btn" value="停止" onClick="sendSer('C0')" style="width:100px;height:50px;background:red;color:white;font-size:24px;"/>
+
+<input type="button" id="btn" value="音量+" onClick="sendSer('A+')" style="width:100px;height:50px;background:violet;color:white;font-size:24px;"/>
+<input type="button" id="btn" value="静音" onClick="sendSer('A0')" style="width:100px;height:50px;background:LightGreen;color:white;font-size:24px;"/>
+<input type="button" id="btn" value="音量-" onClick="sendSer('A-')" style="width:100px;height:50px;background:violet;color:white;font-size:24px;"/> 
+
+
+
+</table>
+<br>
+<br>
+<td><select name="cnum" id="cnum" style='width:300px;font-size:24px;'>
+
 <OPTION value="1">苏州电台交通广播</OPTION>
 <OPTION value="2">苏州电台新闻广播</OPTION>
 <OPTION value="3">苏州电台生活广播</OPTION>
@@ -80,11 +105,7 @@ sendSer('E3');
 <OPTION value="19">厦门电台7</OPTION> 
 <OPTION value="20">厦门电台8</OPTION>
 <OPTION value="21">海峡之声</OPTION> 
-</select></td><td/>
-<input type="button" id="btn" value="收听" onclick="setchannel(this)" />
-<input type="button" id="btn" value="停止" onclick="sendSer('C0')" /> 
-</table>
-
+</select></td>
 </div>
 </body>
 </html>

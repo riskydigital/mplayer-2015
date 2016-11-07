@@ -2,6 +2,9 @@
 
 
 action = {
+  ["A+"] = function (x) print("\r\n"); os.execute("amixer set PCM 2%+1") end,
+  ["A0"] = function (x) print("\r\n"); os.execute("amixer set PCM 0%") end,
+  ["A-"] = function (x) print("\r\n"); os.execute("amixer set PCM 2%-1") end,
   ["C0"] = function (x) print("\r\n"); os.execute("killall mplayer"); print("Radio off") end, 
   ["C1"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mmst://58.211.0.53/1048"); print("苏州电台交通广播") end,
   ["C2"] = function (x) print("\r\n"); os.execute("killall mplayer"); os.execute("sleep 3"); os.execute("screen -d -m mplayer mmst://58.211.0.53/911"); print("苏州电台新闻广播") end,
